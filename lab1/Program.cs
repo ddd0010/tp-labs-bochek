@@ -68,11 +68,44 @@
         Console.WriteLine(a);
     }
 
+    static void Taylor()
+    {
+        Console.WriteLine("\nВычисление ряда Тайлера");
+        Console.Write("Введите n (-100..100): ");
+
+        if (!double.TryParse(Console.ReadLine(), out double x) || x < -100.0 || x > 100.0)
+        {
+            Console.WriteLine("Ошибка: нужно число от -100 до 100.");
+            return;
+        }
+
+        double sum = 0.0;
+        double term = x;
+
+        int n = 0;
+        int count = 0;
+
+        while (Math.Abs(term) > 1e-6)
+        {
+            sum += term;
+
+            n++;
+            count++;
+
+            term *= -x * x / ((2 * n) * (2 * n + 1));
+        }
+
+        Console.WriteLine($"Ряд Тайлера: {sum}");
+        Console.WriteLine($"Количество просуммированных членов: {count}");
+        Console.WriteLine($"Синус: {Math.Sin(x)}");
+    }
+
     static void Main(string[] args)
     {
         Factorial();
         Fibonacci();
         ValueFunction();
+        Taylor();
 
         Console.ReadLine();
     }
