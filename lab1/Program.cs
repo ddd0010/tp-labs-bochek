@@ -112,11 +112,29 @@
 
     static void Main(string[] args)
     {
-        Factorial();
-        Fibonacci();
-        ValueFunction();
-        Taylor();
+        Console.WriteLine("Доступные меню:");
+        Console.WriteLine("1. Вычисление факториала");
+        Console.WriteLine("2. Вычисление Фибоначчи");
+        Console.WriteLine("3. Вычисление значения функции");
+        Console.WriteLine("4. Вычисление ряда Тайлера");
+        Console.WriteLine("\nУкажите номер нужного меню: ");
 
+        if (!int.TryParse(Console.ReadLine(), out int menu) || menu < 1 || menu > 4)
+        {
+            Console.WriteLine("Ошибка: нужен номер от 1 до 4.");
+        }
+        else
+        {
+            switch (menu)
+            {
+                case 1: Factorial(); break;
+                case 2: Fibonacci(); break;
+                case 3: ValueFunction(); break;
+                case 4: Taylor(); break;
+            }
+        }
+
+        Console.WriteLine("\nНажмите Enter для выхода из программы");
         Console.ReadLine();
     }
 }
