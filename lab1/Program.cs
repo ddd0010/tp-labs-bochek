@@ -1,6 +1,6 @@
 ﻿class Program
 {
-    static void Factorial()
+    static long? Factorial()
     {
         Console.WriteLine("\nФакториал");
         Console.Write("Введите n (0..20): ");
@@ -8,10 +8,12 @@
         if (!int.TryParse(Console.ReadLine(), out int n) || n < 0 || n > 20)
         {
             Console.WriteLine("Ошибка: нужно целое число от 0 до 20.");
-            return;
+            return null;
         }
 
-        Console.WriteLine($"{n}! = {Factorial(n)}");
+        long result = Factorial(n);
+
+        Console.WriteLine($"{n}! = {result}");
 
         static long Factorial(int n)
         {
@@ -20,9 +22,11 @@
                 result *= i;
             return result;
         }
+
+        return result;
     }
 
-    static void Fibonacci()
+    static string? Fibonacci()
     {
         Console.WriteLine("\nФибоначчи");
         Console.Write("Введите n (0..20): ");
@@ -30,30 +34,32 @@
         if (!int.TryParse(Console.ReadLine(), out int n) || n < 0 || n > 20)
         {
             Console.WriteLine("Ошибка: нужно целое число от 0 до 20.");
-            return;
+            return null;
         }
 
         long a = 0;
         long b = 1;
+        string result = "";
 
         for (int i = 0; i < n; i++)
         {
             if (i > 0)
             {
-                Console.Write(", ");
+                result += ", ";
             }
 
-            Console.Write(a);
+            result += a;
 
             long temp = a;
             a = b;
             b = temp + b;
         }
 
-        Console.WriteLine("");
+        Console.WriteLine(result);
+        return result;
     }
 
-    static void ValueFunction()
+    static double? ValueFunction()
     {
         Console.WriteLine("\nВычисление значения функции");
         Console.Write("Введите n (-10..10): ");
@@ -61,14 +67,16 @@
         if (!double.TryParse(Console.ReadLine(), out double x) || x < -10.0 || x > 10.0)
         {
             Console.WriteLine("Ошибка: нужно число от -10 до 10.");
-            return;
+            return null;
         }
 
-        double a = Math.Sqrt(Math.Log(4.0 / 3.0)) + (x + 9.0 / 7.0) - Math.Exp(Math.Sin(1.3 * x - 0.7));
-        Console.WriteLine(a);
+        double value = Math.Sqrt(Math.Log(4.0 / 3.0)) + (x + 9.0 / 7.0) - Math.Exp(Math.Sin(1.3 * x - 0.7));
+        Console.WriteLine(value);
+
+        return value;
     }
 
-    static void Taylor()
+    static (double, int)? Taylor()
     {
         Console.WriteLine("\nВычисление ряда Тайлера");
         Console.Write("Введите n (-100..100): ");
@@ -76,7 +84,7 @@
         if (!double.TryParse(Console.ReadLine(), out double x) || x < -100.0 || x > 100.0)
         {
             Console.WriteLine("Ошибка: нужно число от -100 до 100.");
-            return;
+            return null;
         }
 
         double sum = 0.0;
@@ -98,6 +106,8 @@
         Console.WriteLine($"Ряд Тайлера: {sum}");
         Console.WriteLine($"Количество просуммированных членов: {count}");
         Console.WriteLine($"Синус: {Math.Sin(x)}");
+
+        return (sum, count);
     }
 
     static void Main(string[] args)
